@@ -53,4 +53,15 @@ public class Contact : ControllerBase
         return Ok(updContact);
     }
     #endregion
+    #region Delete
+    [HttpDelete]
+    public async Task<IActionResult> Delete(int Id)
+    {
+        var delContact = _context.Contact.FirstOrDefault(e => e.Id == Id);
+
+        _context.Contact.Remove(delContact);
+        _context.SaveChangesAsync();
+        return Ok(delContact);
+    }
+    #endregion
 }
