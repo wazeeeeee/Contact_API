@@ -14,4 +14,13 @@ public class Contact : ControllerBase
     {
         _context = context;
     }
+    
+    #region GetALL
+    [HttpGet]
+    public async Task<IActionResult> GetContact()
+    {
+        var contacts = await _context.Contact.ToListAsync();
+        return Ok(contacts);
+    }
+    #endregion
 }
