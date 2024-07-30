@@ -37,4 +37,20 @@ public class Contact : ControllerBase
         return new JsonResult("Contact Created Successfully");
     }
     #endregion
+    #region Update
+    [HttpPut]
+    public async Task<IActionResult> UpdContact(API_Model.Contact updContact)
+    {
+        var contactDb = await _context.Contact.FindAsync(updContact.Id);
+        contactDb.Nom = updContact.Nom;
+        contactDb.Prenom = updContact.Prenom;
+        contactDb.Nom_Complet = updContact.Nom_Complet;
+        contactDb.Sexe = updContact.Sexe;
+        contactDb.Date_Naissance = updContact.Date_Naissance;
+        contactDb.Avatar = updContact.Avatar;
+        
+        await _context.SaveChangesAsync();
+        return Ok(updContact);
+    }
+    #endregion
 }
